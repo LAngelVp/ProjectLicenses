@@ -1,27 +1,34 @@
-# ProjectsLicenses
+# 🔐 Gestor y Generador Criptográfico de Licencias RSA (Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+Una aplicación web moderna desarrollada en **Angular** y **Angular Material** que permite la generación, gestión y firma digital de licencias de software por cliente y Hardware ID, ejecutando todo el proceso de firmado criptográfico **100% en el navegador (Client-Side)** mediante el API nativo **Web Crypto API**.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Características Principales
 
-## Code scaffolding
+* **Generación Criptográfica RSA-2048:** Creación de pares de claves (pública y privada) directamente en el navegador en formato de codificación PEM (`PKCS#8` para la clave privada y `SPKI` para la clave pública).
+* **Firmado Digital Seguro SHA-256:** Las licencias se firman usando la clave privada RSA, evitando cualquier posibilidad de manipulación o alteración de datos por parte del cliente.
+* **Importación de Claves Existentes:** Permite cargar archivos `.pem` previamente creados para mantener una misma identidad criptográfica y reutilizar la clave privada maestra.
+* **Licencias Vinculadas a Hardware ID:** Generación de un *payload* que vincula la validez del software al hardware específico del cliente y a una fecha de vencimiento limite.
+* **Exportación Directa a Archivos (`.txt` y `.pem`):** Descarga automática de licencias en formato de texto plano con la nomenclatura estandarizada:
+  `[NombreCliente]_[FechaCreacion]_[FechaVencimiento].txt`
+* **Cero Dependencias de Servidor Backend:** Lógica criptográfica ejecutada de forma local y segura en memoria.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🛠️ Tecnologías Utilizadas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* **Framework Frontend:** [Angular](https://angular.dev/) (Componentes Standalone)
+* **Librería UI:** [Angular Material](https://material.angular.dev/)
+* **Criptografía:** Web Crypto API (`window.crypto.subtle`)
+* **Entorno de Ejecución / Gestor de Paquetes:** [Bun](https://bun.sh/) / Node.js
+* **Lenguaje:** TypeScript
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 📐 Estructura de la Licencia Generada
 
-## Running end-to-end tests
+La clave de licencia que se emite sigue una arquitectura similar a un JSON Web Token (JWT) compuesta por dos partes separadas por un punto (`.`):
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```text
+[PAYLOAD_BASE64].[FIRMA_DIGITAL_SHA256_BASE64]
